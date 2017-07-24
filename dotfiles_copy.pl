@@ -81,19 +81,26 @@ use Pod::Usage;
                     $self->_run_cmd(["git pull origin master"]);
                 });
         } else {
-            if (mkdir $dir_name) {
-                $self->_run_in_dir($dir_name, sub {
-                        $self->_run_cmd([
-                            "touch .gitignore",
-                            "git init",
-                            "git add .",
-                            "git commit -m 'initial commit'",
-                            "git remote add origin $git_url",
-                            "git push origin master",
-                        ]);
-                    });
-            } else {
-                die "checkout_or_update: can't create $dir_name : $!\n";
+
+            eval {
+                $self->_run_cmd(["git clone $git_url $dir_name"]);
+            };
+            if ($@) {
+                if (mkdir $dir_name) {
+                    $self->_run_in_dir($dir_name, sub {
+
+                            $self->_run_cmd([
+                                "touch .gitignore",
+                                "git init",
+                                "git add .",
+                                "git commit -m 'initial commit'",
+                                "git remote add origin $git_url",
+                                "git push origin master",
+                            ]);
+                        });
+                } else {
+                    die "checkout_or_update: can't create $dir_name : $!\n";
+                }
             }
         }
     }

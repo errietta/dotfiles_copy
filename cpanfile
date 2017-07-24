@@ -1,5 +1,4 @@
 requires 'Moo', '0';
-requires 'File::Copy::Recursive', '0';
 requires 'Config::ZOMG', '0';
 requires 'File::Spec', '0';
 requires 'File::chdir', '0';

@@ -8,7 +8,6 @@ use Pod::Usage;
     package App::DotFiles::Copy;
 
     use Moo;
-    use File::Copy::Recursive qw/rcopy/;
     use Config::ZOMG;
     use File::Spec;
     use File::chdir;

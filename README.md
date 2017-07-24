@@ -1,6 +1,8 @@
 # dotfiles_copy
 Copies dotfiles to and from a git repo :D
+
 Usage:
+
     dotfiles_copy.pl -files .vimrc --copy --save
 
     dotfiles_copy.pl --update

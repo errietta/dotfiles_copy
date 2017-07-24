@@ -127,11 +127,12 @@ use Pod::Usage;
         $self->checkout_or_update;
 
         my $config = $self->config;
-        my @files = @{$config->{files}};
 
-        if (!scalar @files) {
+        if (!$config->{files}) {
             die("no files given, try --file=.., or alter the config?");
         }
+
+        my @files = @{$config->{files}};
 
         foreach my $file (@files) {
             $file = File::Spec->catfile($ENV{'HOME'}, $file);
@@ -147,11 +148,12 @@ use Pod::Usage;
         $self->checkout_or_update;
 
         my $config = $self->config;
-        my @files = @{$config->{files}};
 
-        if (!scalar @files) {
+        if (!$config->{files}) {
             die("no files given, try --file=.., or alter the config?");
         }
+
+        my @files = @{$config->{files}};
 
         foreach my $file (@files) {
             my $src = File::Spec->catfile($config->{dir_name}, $file);
@@ -252,9 +254,13 @@ my $app = App::DotFiles::Copy->new(
 );
 
 if ($copy) {
+    print "Initialising copy of local files...\n";
     $app->do_copy;
+    print "Success\n";
 } elsif ($update) {
+    print "Initialising recovery of dotfiles from repo..\n";
     $app->do_update;
+    print "Success\n";
 }
 
 if ($save) {

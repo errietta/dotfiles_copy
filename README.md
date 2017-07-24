@@ -8,6 +8,7 @@ Usage:
     dotfiles_copy.pl --help
 
 Options:
+
     copy
         Copy local dotfiles to rpeo
 

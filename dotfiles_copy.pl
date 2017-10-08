@@ -90,6 +90,10 @@ my $app = App::DotFiles::Copy->new(
     }
 );
 
+if ($save) {
+    $app->save_config;
+}
+
 if ($copy) {
     print "Initialising copy of local files...\n";
     $app->do_copy;
@@ -98,8 +102,4 @@ if ($copy) {
     print "Initialising recovery of dotfiles from repo..\n";
     $app->do_update;
     print "Success\n";
-}
-
-if ($save) {
-    $app->save_config;
 }

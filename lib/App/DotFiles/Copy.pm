@@ -56,8 +56,10 @@ sub save_config {
     my $opts = $self->opts;
     my $config_file = $opts->{config_file} || File::Spec->catfile($ENV{'HOME'}, q{dotfiles.json});
 
+    my $config = $self->config;
+
     open (my $fh, '>', $config_file) or die "$!";
-    print $fh encode_json($self->config);
+    print $fh encode_json($config);
     close $fh;
 }
 

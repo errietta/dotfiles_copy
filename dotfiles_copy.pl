@@ -34,7 +34,7 @@ Push local dotfiles to repo
 
 Pull local dotfiles from repo
 
-=item files
+=item file
 
 Files to copy, can also be given in config_file
 

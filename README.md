@@ -3,22 +3,22 @@ Copies dotfiles to and from a git repo :D
 
 Usage:
 
-    dotfiles_copy.pl -files .vimrc --copy --save
+    dotfiles_copy.pl -file .vimrc --push --save
 
-    dotfiles_copy.pl --update
+    dotfiles_copy.pl --pull
 
     dotfiles_copy.pl --help
 
 Options:
 
-    copy
-        Copy local dotfiles to rpeo
+    push
+        Copy/Push local dotfiles to rpeo
 
-    update
-        Update local dotfiles from repo
+    pull
+        Pull/Update local dotfiles from repo
 
-    files
-        Files to copy, can also be given in config_file
+    file
+        Give multiple times for multiple files, Files to copy, can also be given in config_file
 
     config_file
         Path to config file, optional, defaults to 'dotfiles_copy.json' in

@@ -11,6 +11,13 @@ has qw/config/ => ( is => 'lazy' );
 
 has opts => ( is => 'ro' );
 
+sub _merge {
+    my ($l1, $l2) = @_;
+
+    my %seen;
+    return [grep( !$seen{$_}++, @$l1, @$l2)];
+}
+
 sub _build_config {
     my ($self) = @_;
 
@@ -21,8 +28,18 @@ sub _build_config {
     my $config = Config::ZOMG->new(file => $config_file);
     my $config_hash = $config->load;
 
-    foreach my $key (qw/files git_url dir_name/) {
+    foreach my $key (qw/git_url dir_name/) {
         $config_hash->{$key} = $opts->{$key} if $opts->{$key};
+    }
+
+    if ($opts->{files}) {
+        if (!$config_hash->{files}) {
+            # just copy the given
+            $config_hash->{files} = $opts->{files};
+        } else {
+            # preserve both
+            $config_hash->{files} = _merge($config_hash->{files}, $opts->{files});
+        }
     }
 
     $config_hash->{dir_name} ||= File::Spec->catfile($ENV{'HOME'}, '.dotfiles');

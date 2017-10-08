@@ -4,7 +4,6 @@ use Moo;
 use Config::ZOMG;
 use File::Spec;
 use File::chdir;
-use Dir::Self;
 use JSON::XS qw/encode_json/;
 
 has qw/config/ => ( is => 'lazy' );
@@ -23,7 +22,7 @@ sub _build_config {
 
     my $opts = $self->opts;
 
-    my $config_file = $opts->{config_file} || File::Spec->catfile(__DIR__, q{dotfiles.json});
+    my $config_file = $opts->{config_file} || File::Spec->catfile($ENV{'HOME'}, q{dotfiles.json});
 
     my $config = Config::ZOMG->new(file => $config_file);
     my $config_hash = $config->load;
@@ -55,7 +54,7 @@ sub save_config {
     my ($self) = @_;
 
     my $opts = $self->opts;
-    my $config_file = $opts->{config_file} || File::Spec->catfile(__DIR__, q{dotfiles.json});
+    my $config_file = $opts->{config_file} || File::Spec->catfile($ENV{'HOME'}, q{dotfiles.json});
 
     open (my $fh, '>', $config_file) or die "$!";
     print $fh encode_json($self->config);

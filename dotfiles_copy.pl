@@ -26,13 +26,13 @@ dotfiles_copy.pl --help
 
 =over
 
-=item copy
+=item push (previously copy)
 
-Copy local dotfiles to rpeo
+Push local dotfiles to repo
 
-=item update
+=item pull (previously update)
 
-Update local dotfiles from repo
+Pull local dotfiles from repo
 
 =item files
 
@@ -63,8 +63,8 @@ Save given options to config.
 my ($copy, $update, $save, $config_file, @files, $git_url, $dir_name,  $help);
 
 GetOptions(
-    "copy"              => \$copy,
-    "update"            => \$update,
+    "copy|push"         => \$copy,
+    "update|pull"       => \$update,
     "save"              => \$save,
     "config_file=s"     => \$config_file,
     "file=s"            => \@files,

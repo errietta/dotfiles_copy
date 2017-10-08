@@ -6,3 +6,7 @@ requires 'Dir::Self', '0';
 requires 'Getopt::Long', '0';
 requires 'JSON::XS', '0';
 requires 'Pod::Usage', '0';
+
+on 'test' => sub {
+    requires 'Test::More', '0';
+};
